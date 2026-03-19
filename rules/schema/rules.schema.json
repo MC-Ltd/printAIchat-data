@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/YOUR_USERNAME/printAIchat-data/main/rules/schema/rules.schema.json",
+  "title": "printAIchat Rules",
+  "description": "Schema for printAIchat extension rules file",
+  "type": "object",
+  "required": ["version", "updatedAt", "rules"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the rules file"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last update"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/$defs/Rule" }
+    }
+  },
+  "$defs": {
+    "Rule": {
+      "type": "object",
+      "required": ["id", "name", "domains", "action", "selector"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique kebab-case identifier"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Human-readable rule name"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "domains": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^(\\*\\.)?[a-z0-9.-]+\\.[a-z]{2,}$"
+          },
+          "description": "List of domains. Use *.example.com for subdomains."
+        },
+        "action": {
+          "type": "string",
+          "enum": ["hide", "remove", "replace", "addClass", "inject"],
+          "description": "DOM action to perform"
+        },
+        "selector": {
+          "type": "string",
+          "minLength": 1,
+          "description": "CSS selector targeting DOM elements"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for replace/addClass/inject actions"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "HTML attribute name for replace action (optional)"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["css", "js"],
+          "description": "Required for inject action"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, rule is ignored by the extension"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Categorization tags for filtering"
+        }
+      },
+      "if": {
+        "properties": { "action": { "const": "inject" } }
+      },
+      "then": {
+        "required": ["type", "value"]
+      }
+    }
+  }
+}

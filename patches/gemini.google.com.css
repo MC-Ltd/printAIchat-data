@@ -1,0 +1,31 @@
+/* printAIchat patch: gemini.google.com */
+
+@media print {
+  /* Приховати хедер */
+  header.app-header,
+  .app-header {
+    display: none !important;
+  }
+
+  /* Приховати sidebar */
+  [class*="side-nav"],
+  [class*="sidebar"],
+  nav {
+    display: none !important;
+  }
+
+  /* Основний контент */
+  [class*="conversation-container"],
+  [class*="chat-content"] {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Повідомлення */
+  [class*="message-bubble"] {
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 0.5pt solid #ddd !important;
+    margin-bottom: 12pt;
+  }
+}

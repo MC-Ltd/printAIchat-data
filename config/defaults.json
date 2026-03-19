@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2025-01-01T00:00:00Z",
+  "defaults": {
+    "enabled_global": true,
+    "disabled_domains": [],
+    "language": "en",
+    "sync_interval_hours": 24
+  },
+  "supportedDomains": [
+    "chat.openai.com",
+    "claude.ai",
+    "gemini.google.com",
+    "copilot.microsoft.com",
+    "chat.mistral.ai",
+    "poe.com"
+  ]
+}

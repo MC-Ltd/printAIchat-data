@@ -1,0 +1,32 @@
+/* printAIchat patch: claude.ai */
+
+@media print {
+  /* Приховати sidebar */
+  [data-testid="conversation-list"],
+  nav,
+  aside {
+    display: none !important;
+  }
+
+  /* Приховати хедер і кнопки дій */
+  header,
+  [data-testid="action-bar"],
+  button {
+    display: none !important;
+  }
+
+  /* Розтягнути основний контент */
+  main,
+  [class*="content"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  /* Уникнути розривів всередині повідомлень */
+  [data-testid="human-turn"],
+  [data-testid="ai-turn"] {
+    page-break-inside: avoid;
+    margin-bottom: 20pt;
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "./schema/rules.schema.json",
+  "version": "1.0.0",
+  "updatedAt": "2025-01-01T00:00:00Z",
+  "rules": [
+    {
+      "id": "chatgpt-hide-sidebar",
+      "name": "ChatGPT: hide sidebar for print",
+      "description": "Hides the left navigation sidebar on ChatGPT when printing",
+      "domains": ["chat.openai.com"],
+      "action": "hide",
+      "selector": "nav[aria-label='Chat history']",
+      "disabled": false,
+      "tags": ["print", "chatgpt", "layout"]
+    },
+    {
+      "id": "chatgpt-hide-input-area",
+      "name": "ChatGPT: hide input area for print",
+      "description": "Hides the message input form when printing",
+      "domains": ["chat.openai.com"],
+      "action": "hide",
+      "selector": "form[data-testid='send-button']",
+      "disabled": false,
+      "tags": ["print", "chatgpt", "layout"]
+    },
+    {
+      "id": "claude-hide-sidebar",
+      "name": "Claude: hide sidebar for print",
+      "description": "Hides the conversation list sidebar on Claude.ai",
+      "domains": ["claude.ai"],
+      "action": "hide",
+      "selector": "[data-testid='conversation-list']",
+      "disabled": false,
+      "tags": ["print", "claude", "layout"]
+    },
+    {
+      "id": "claude-add-print-class",
+      "name": "Claude: add print-friendly class to main content",
+      "description": "Adds a CSS class to the main content area for print styling",
+      "domains": ["claude.ai"],
+      "action": "addClass",
+      "selector": "main",
+      "value": "printaichat-print-visible",
+      "disabled": false,
+      "tags": ["print", "claude", "layout"]
+    },
+    {
+      "id": "gemini-hide-toolbar",
+      "name": "Gemini: hide top toolbar",
+      "description": "Hides the top navigation bar on Gemini",
+      "domains": ["gemini.google.com"],
+      "action": "hide",
+      "selector": "header.app-header",
+      "disabled": false,
+      "tags": ["print", "gemini", "layout"]
+    },
+    {
+      "id": "all-sites-inject-print-css",
+      "name": "All sites: inject base print CSS",
+      "description": "Injects base print styles on all supported AI chat sites",
+      "domains": [
+        "chat.openai.com",
+        "claude.ai",
+        "gemini.google.com",
+        "copilot.microsoft.com"
+      ],
+      "action": "inject",
+      "type": "css",
+      "value": "@media print { body { font-size: 12pt; line-height: 1.5; } }",
+      "disabled": false,
+      "tags": ["print", "all", "css"]
+    },
+    {
+      "id": "chatgpt-replace-title",
+      "name": "ChatGPT: set print title",
+      "description": "Replaces the page title attribute for cleaner print headers",
+      "domains": ["chat.openai.com"],
+      "action": "replace",
+      "selector": "title",
+      "value": "ChatGPT Conversation",
+      "disabled": false,
+      "tags": ["print", "chatgpt", "meta"]
+    }
+  ]
+}

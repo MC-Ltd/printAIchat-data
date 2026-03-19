@@ -1,0 +1,51 @@
+/* printAIchat patch: chat.openai.com */
+/* Застосовується через action: inject, type: css */
+
+@media print {
+  /* Приховати навігацію */
+  nav,
+  [data-testid="navigation"],
+  [class*="Sidebar"] {
+    display: none !important;
+  }
+
+  /* Приховати форму введення */
+  form,
+  [data-testid="send-button"],
+  [class*="BottomBar"] {
+    display: none !important;
+  }
+
+  /* Розтягнути контент на всю ширину */
+  main,
+  [class*="ConversationPanel"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Стиль повідомлень */
+  [data-message-author-role="user"],
+  [data-message-author-role="assistant"] {
+    page-break-inside: avoid;
+    margin-bottom: 16pt;
+    border-bottom: 0.5pt solid #ccc;
+    padding-bottom: 12pt;
+  }
+
+  /* Мітки ролей */
+  [data-message-author-role="user"]::before {
+    content: "User:";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4pt;
+  }
+
+  [data-message-author-role="assistant"]::before {
+    content: "Assistant:";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4pt;
+  }
+}
